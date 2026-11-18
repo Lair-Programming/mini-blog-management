@@ -1,12 +1,17 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PublicPostController;
 use Illuminate\Support\Facades\Route;
 
-// Visiting the home page (/) sends the user to the posts list.
+// Home page (/) sends visitors to the public blog.
 Route::get('/', function () {
-    return redirect()->route('posts.index');
+    return redirect()->route('blog.index');
 });
 
-// One line that creates all seven CRUD routes for posts.
+// Public side: readers see published posts only.
+Route::get('/blog', [PublicPostController::class, 'index'])->name('blog.index');
+Route::get('/blog/{post}', [PublicPostController::class, 'show'])->name('blog.show');
+
+// Admin side: full CRUD for posts (no login yet).
 Route::resource('posts', PostController::class);
