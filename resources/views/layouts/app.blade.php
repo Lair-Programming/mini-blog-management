@@ -62,6 +62,12 @@
                         <a class="nav-link" href="{{ route('posts.index') }}">All Posts</a>
                     </li>
                 </ul>
+                <form action="{{ route('logout') }}" method="POST" class="d-inline me-2">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-light">
+                        <i class="bi bi-box-arrow-right me-1"></i>Logout
+                    </button>
+                </form>
                 <a class="btn btn-primary" href="{{ route('posts.create') }}">
                     <i class="bi bi-plus-lg me-1"></i>New Post
                 </a>
