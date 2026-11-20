@@ -116,3 +116,15 @@ Requirements: Docker Desktop (or Docker Engine with the Compose plugin). This st
 
 - Real secrets live in `.env` and `.env.docker`, which are ignored by Git. Only the `.example` templates are committed.
 - The admin pages have no login yet, so do not expose this app publicly without adding authentication or restricting access.
+
+## Deployment (AWS EC2)
+
+The Docker setup runs on an Ubuntu EC2 instance:
+
+1. Install Docker and clone this repository on the server.
+2. Create `.env.docker` from `.env.docker.example` with new secrets.
+3. Run `docker compose up -d --build`, then `docker compose exec app php artisan migrate --force`.
+4. Create the admin account (`admin:create`, or `tinker` if the prompt is unavailable).
+5. Allow inbound TCP port 8080 in the security group and restrict SSH to your own IP.
+
+Admin pages require login. The public blog is at `/blog` and the admin area at `/posts`.
